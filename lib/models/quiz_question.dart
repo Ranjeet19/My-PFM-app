@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 
 part 'quiz_question.g.dart';
 
-@HiveType(typeId: 2)
+@HiveType(typeId: 3)
 class QuizQuestion extends HiveObject {
   @HiveField(0)
   String question;

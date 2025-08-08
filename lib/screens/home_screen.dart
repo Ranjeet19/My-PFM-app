@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_pfm_app/screens/favorite_quotes_screen.dart';
+import 'package:my_pfm_app/widgets/goal_section.dart';
 import '../models/transaction.dart';
 import '../models/quote.dart';
 import 'transaction_screen.dart';
@@ -84,15 +85,17 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 _buildBlackAccountCard(context, balance, income, expense),
                 const SizedBox(height: 24),
+
+              // 🎯, Goals Section,
+                const GoalSection(),
+
+                const SizedBox(height: 16),
+
                 const Text("\ud83e\uddd0 Quiz of the Day",
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 8),
-                ListTile(
-                  leading: const Icon(Icons.quiz),
-                  title: const Text('Quiz'),
-                  onTap: () => Navigator.pushNamed(context, '/quiz'),
-                ),
+
                 _buildQuizPlaceholder(context),
               ],
             ),
@@ -114,19 +117,59 @@ class HomeScreen extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: Colors.black,
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color(0xFF404040),
+                Color(0xFF1A1A1A), 
+                Color(0xFF4A4A4A),
+                ],
+                stops: [0.1, 0.5, 0.9],
+              ),
+              boxShadow: [
+                BoxShadow(
+                color: Colors.black.withOpacity(0.25),
+                spreadRadius: 1,
+                blurRadius: 6,
+                offset: Offset(0, 3),
+                ),
+                BoxShadow(
+                color: Colors.white.withOpacity(0.2),
+                spreadRadius: 2,
+                blurRadius: 4,
+                offset: Offset(-1, -1),
+                ),
+                BoxShadow(
+                color: Colors.white.withOpacity(0.1),
+                spreadRadius: 1,
+                blurRadius: 2,
+                offset: Offset(1, 1),
+                ),
+              ],
           borderRadius: BorderRadius.circular(20),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "Current Balance",
-              style: TextStyle(color: Colors.white70, fontSize: 14),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                const Text(
+                  "Current Balance",
+                  style: TextStyle(color: Colors.white70, fontSize: 14),
+                ),
+                const SizedBox(height: 8),
+                ],
+              ),
+              Icon(Icons.sensors, color: Colors.white70, size: 24),
+              ],
             ),
-            const SizedBox(height: 8),
             Text(
-              "\$${balance.toStringAsFixed(2)}",
+              "\£${balance.toStringAsFixed(2)}",
               style: const TextStyle(
                   color: Colors.white,
                   fontSize: 28,
@@ -135,9 +178,9 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 16),
             Row(
               children: [
-                _miniCard("+\$${income.toStringAsFixed(2)}", Colors.green),
+                _miniCard("+\£${income.toStringAsFixed(2)}", Colors.green),
                 const SizedBox(width: 10),
-                _miniCard("-\$${expense.toStringAsFixed(2)}", Colors.red),
+                _miniCard("-\£${expense.toStringAsFixed(2)}", Colors.red),
               ],
             ),
             const SizedBox(height: 16),
@@ -157,7 +200,7 @@ class HomeScreen extends StatelessWidget {
   Widget _miniCard(String text, Color color) {
     return Container(
       width: 100,
-      height: 50,
+      height: 40,
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(12),
@@ -195,23 +238,33 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildQuizPlaceholder(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text("Quiz feature coming soon!"),
-        ));
-      },
+      // onTap: () {
+      //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      //     content: Text("Quiz feature coming soon!"),
+      //   ));
+      // },
+
+      onTap: () => Navigator.pushNamed(context, '/quiz'),
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
+          boxShadow: const [
+            BoxShadow(
+                color: Colors.black12, blurRadius: 4, offset: Offset(2, 3))
+          ],
           gradient: const LinearGradient(
-            colors: [Color(0xFFA0E9FF), Color(0xFFCBF1FF)],
+            colors: [
+              Color.fromARGB(255, 234, 237, 239),
+              Color.fromARGB(255, 241, 243, 244)
+            ],
           ),
           borderRadius: BorderRadius.circular(12),
         ),
         child: const Text(
           'Take Today\'s Quiz \u2794',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          style: TextStyle(
+              fontSize: 16, fontWeight: FontWeight.w600, color: Colors.green),
         ),
       ),
     );

@@ -50,7 +50,7 @@ class TransactionTile extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              '${transaction.isIncome ? '+' : '-'} \$${transaction.amount.toStringAsFixed(2)}',
+              '${transaction.isIncome ? '+' : '-'} \£${transaction.amount.toStringAsFixed(2)}',
               style: TextStyle(
                 color: transaction.isIncome ? Colors.green : AppColors.red,
                 fontWeight: FontWeight.w600,

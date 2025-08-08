@@ -8,7 +8,7 @@ part of 'goal.dart';
 
 class GoalAdapter extends TypeAdapter<Goal> {
   @override
-  final int typeId = 1;
+  final int typeId = 2;
 
   @override
   Goal read(BinaryReader reader) {
@@ -18,8 +18,8 @@ class GoalAdapter extends TypeAdapter<Goal> {
     };
     return Goal(
       title: fields[0] as String,
-      targetAmount: fields[1] as double,
-      savedAmount: fields[2] as double,
+      current: fields[1] as double,
+      target: fields[2] as double,
     );
   }
 
@@ -30,9 +30,9 @@ class GoalAdapter extends TypeAdapter<Goal> {
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
-      ..write(obj.targetAmount)
+      ..write(obj.current)
       ..writeByte(2)
-      ..write(obj.savedAmount);
+      ..write(obj.target);
   }
 
   @override

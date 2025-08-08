@@ -2,20 +2,16 @@ import 'package:hive/hive.dart';
 
 part 'goal.g.dart';
 
-@HiveType(typeId: 1)
+@HiveType(typeId: 2)
 class Goal extends HiveObject {
   @HiveField(0)
   String title;
 
   @HiveField(1)
-  double targetAmount;
+  double current;
 
   @HiveField(2)
-  double savedAmount;
+  double target;
 
-  Goal({
-    required this.title,
-    required this.targetAmount,
-    required this.savedAmount,
-  });
+  Goal({required this.title, required this.current, required this.target});
 }

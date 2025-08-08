@@ -58,12 +58,12 @@ class FinanceCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _summaryItem(Icons.arrow_downward, 'Income', '+\$${income.toStringAsFixed(2)}', Colors.greenAccent),
-                    _summaryItem(Icons.arrow_upward, 'Expense', '-\$${expense.toStringAsFixed(2)}', AppColors.red),
+                    _summaryItem(Icons.arrow_downward, 'Income', '+\£${income.toStringAsFixed(2)}', Colors.greenAccent),
+                    _summaryItem(Icons.arrow_upward, 'Expense', '-\£${expense.toStringAsFixed(2)}', AppColors.red),
                   ],
                 ),
                 const SizedBox(height: 12),
-                Text('Balance: \$${total.toStringAsFixed(2)}',
+                Text('Balance: \£${total.toStringAsFixed(2)}',
                   style: const TextStyle(color: AppColors.white, fontSize: 16),
                 ),
               ],

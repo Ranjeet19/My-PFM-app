@@ -13,8 +13,8 @@ class TransactionScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Wise Wallet"),
-        backgroundColor: Colors.green.shade400,
+        title: const Text("My PFM Wallet", style: TextStyle(color: Colors.white),),
+        backgroundColor: const Color(0xFF56AB2F),
       ),
       body: ValueListenableBuilder(
         valueListenable: box.listenable(),
@@ -39,11 +39,11 @@ class TransactionScreen extends StatelessWidget {
             child: ListView(
               padding: const EdgeInsets.all(16),
               children: [
-                _buildSummaryCard("Total Income 💰", "+\$${totalIncome.toStringAsFixed(2)}", Colors.green, Icons.check_circle),
+                _buildSummaryCard("Total Income 💰", "+\£${totalIncome.toStringAsFixed(2)}", Colors.green, Icons.check_circle),
                 const SizedBox(height: 10),
-                _buildSummaryCard("Total Expenses 🧾", "-\$${totalExpense.toStringAsFixed(2)}", Colors.red, Icons.cancel),
+                _buildSummaryCard("Total Expenses 🧾", "-\£${totalExpense.toStringAsFixed(2)}", Colors.red, Icons.cancel),
                 const SizedBox(height: 10),
-                _buildSummaryCard("Net Balance 📊", "\$${netBalance.toStringAsFixed(2)}", Colors.black, Icons.balance),
+                _buildSummaryCard("Net Balance 📊", "\£${netBalance.toStringAsFixed(2)}", Colors.black, Icons.balance),
                 const SizedBox(height: 24),
                 const Text("Recent Transactions", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 4),
@@ -67,7 +67,7 @@ class TransactionScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.add, color: Colors.white,),
         onPressed: () {
           showDialog(
             context: context,
