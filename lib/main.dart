@@ -1,31 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:my_pfm_app/models/goal.dart';
-import 'package:my_pfm_app/screens/leaderboard_screen.dart';
-import 'package:my_pfm_app/screens/quiz_screen.dart';
+import 'package:provider/provider.dart';
+
 import 'models/transaction.dart';
-import 'screens/home_screen.dart';
 import 'models/quote.dart';
-
+import 'models/goal.dart';
 import 'models/quiz_question.dart';
+import 'services/language_service.dart';
+import 'screens/home_screen.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
 
-  // Register Hive Adapters with UNIQUE typeIds
-  Hive.registerAdapter(FinanceTransactionAdapter()); // typeId: 0
-  Hive.registerAdapter(QuoteAdapter());              // typeId: 1
-  Hive.registerAdapter(QuizQuestionAdapter());       // typeId: 3
-  Hive.registerAdapter(GoalAdapter());               // typeId: 2
+  Hive.registerAdapter(FinanceTransactionAdapter()); // 0
+  Hive.registerAdapter(QuoteAdapter());              // 1
+  Hive.registerAdapter(GoalAdapter());               // 2
+  Hive.registerAdapter(QuizQuestionAdapter());       // 3
 
-  // Open Boxes
-  await Hive.openBox<FinanceTransaction>('transactions'); // for income/expenses
-  await Hive.openBox<Quote>('favorites');                 // for saved quotes
-  await Hive.openBox<Goal>('goals');                      // for goal tracking
-  await Hive.openBox<int>('quizPoints');    
+  await Hive.openBox<FinanceTransaction>('transactions');
+  await Hive.openBox<Quote>('favorites');
+  await Hive.openBox<Goal>('goals');
+  await Hive.openBox<int>('quizPoints');
 
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => LanguageService(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -34,16 +37,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Finance Tracker',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.green,
-          // textTheme: GoogleFonts.poppinsTextTheme(),
-        ),
-        home: const HomeScreen(),
-        routes: {
-          '/quiz': (context) => const QuizScreen(),
-          '/leaderboard': (context) => const LeaderboardScreen(),
-        });
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(primarySwatch: Colors.green),
+      home:  HomeScreen(),
+    );
   }
 }

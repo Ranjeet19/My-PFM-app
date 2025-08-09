@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:my_pfm_app/constants/colors.dart';
 import 'package:my_pfm_app/screens/favorite_quotes_screen.dart';
 import 'package:my_pfm_app/widgets/goal_section.dart';
 import '../models/transaction.dart';
@@ -18,27 +19,45 @@ class HomeScreen extends StatelessWidget {
     final box = Hive.box<FinanceTransaction>('transactions');
 
     return Scaffold(
-      backgroundColor: const Color(0xFFE8FCEF),
-      appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF4CAF50), Color.fromARGB(255, 13, 138, 22)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-        ),
-        elevation: 0,
-        title: const Text(
-          "My Finance Tracker",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-          ),
-        ),
-        centerTitle: true,
-      ),
+      backgroundColor: Colors.white,
+     appBar: AppBar(
+  title: const Text('My PFM Wallet'),
+  backgroundColor: AppColors.darkGreen,
+  foregroundColor: const Color.fromARGB(255, 244, 245, 241),
+  
+  actions: [
+    IconButton(
+      icon: const Icon(Icons.notifications),
+      onPressed: () {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('No new notifications')),
+        );
+      },
+    ),
+    PopupMenuButton<String>(
+      icon: const Icon(Icons.language),
+      onSelected: (lang) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Selected Language: $lang')),
+        );
+      },
+      itemBuilder: (context) => [
+        'English',
+        'Nepali',
+        'Hindi',
+        'Spanish',
+        'French',
+        'Chinese'
+      ].map((lang) {
+        return PopupMenuItem<String>(
+          value: lang,
+          child: Text(lang),
+        );
+      }).toList(),
+    ),
+  ],
+),
+
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
