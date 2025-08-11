@@ -64,8 +64,10 @@ class HomeScreen extends StatelessWidget {
           children: [
             const DrawerHeader(
               decoration: BoxDecoration(color: Colors.green),
-              child: Text('Wise Wallet Menu',
-                  style: TextStyle(color: Colors.white, fontSize: 20)),
+              child: Center(
+                child: Text('My PFM Wallet',
+                    style: TextStyle(color: Colors.white, fontSize: 20)),
+              ),
             ),
             ListTile(
               leading: const Icon(Icons.favorite_border),
