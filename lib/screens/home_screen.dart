@@ -264,7 +264,7 @@ class HomeScreen extends StatelessWidget {
       //     content: Text("Quiz feature coming soon!"),
       //   ));
       // },
-
+      
       onTap: () => Navigator.pushNamed(context, '/quiz'),
       child: Container(
         width: double.infinity,

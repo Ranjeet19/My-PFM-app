@@ -39,12 +39,14 @@ class LeaderboardScreen extends StatelessWidget {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 10),
-                  Text(
-                    '$totalPoints',
-                    style: const TextStyle(
-                      fontSize: 48,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.green,
+                  Center(
+                    child: Text(
+                      '$totalPoints',
+                      style: const TextStyle(
+                        fontSize: 48,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green,
+                      ),
                     ),
                   ),
                 ],
@@ -52,7 +54,7 @@ class LeaderboardScreen extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             const Text(
-              'More leaderboard features can be added here!',
+              '',
               style: TextStyle(fontSize: 16),
             ),
           ],

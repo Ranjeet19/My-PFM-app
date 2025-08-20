@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:my_pfm_app/screens/leaderboard_screen.dart';
+import 'package:my_pfm_app/screens/quiz_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'models/transaction.dart';
@@ -40,6 +42,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.green),
       home:  HomeScreen(),
+       routes: {
+    '/leaderboard': (context) => const LeaderboardScreen(),
+    '/quiz': (context) => const QuizScreen(),
+
+  },
     );
   }
 }
